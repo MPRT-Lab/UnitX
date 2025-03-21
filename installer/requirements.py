@@ -9,6 +9,8 @@ import win32api as win
 installation_running = False
 progress_value = 0
 
+global system_os = platform.system()
+
 def log_output(text):
     """Append text to the log text widget and auto-scroll."""
     log_text.insert(tk.END, text)
@@ -70,14 +72,24 @@ def go_to_next_page():
     # Clear current window
     root.destroy()
     try:
-        subprocess.run(['python', 'location.py'], check=True)
+        if system_os == "Windows":
+            subprocess.run(['python', 'location.py'], check=True)
+        elif system_os == "Linux":
+            subprocess.run(['python3', 'requirements.py'], check=True)
+        else:
+            subprocess.run(['python', 'requirements.py'], check=True)
     except Exception as e:
         messagebox.showerror("Error", f"an error occurred: {e}")
 
 def go_to_back_page():
     root.destroy()
     try:
-        subprocess.run(['python', 'welcome.py'])
+        if system_os == "Windows":
+            subprocess.run(['python', 'welcome.py'])
+        elif system_os == "Linux":
+            subprocess.run(['python3', 'requirements.py'], check=True)
+        else:
+            subprocess.run(['python', 'requirements.py'], check=True)
     except Exception as e:
         messagebox.showerror('Error',f'an error occurred: {e}')
 
