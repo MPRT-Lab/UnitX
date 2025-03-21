@@ -4,7 +4,9 @@ import subprocess
 import threading
 import os
 import win32api as win
+import platform
 
+system_os = platform.system()
 def log_output(text):
     """Append text to the log widget and auto-scroll."""
     log_text.insert(tk.END, text)
@@ -116,7 +118,12 @@ def finish_build():
 def go_clear_page():
     root.destroy()
     try:
-        subprocess.run(['python','complete.py'])
+        if system_os == "Windows":
+            subprocess.run(['python','complete.py'])
+        elif system_os == "Linux":
+            subprocess.run(['python3','complete.py'])
+        else:
+            subprocess.run(['python','complete.py'])
     except Exception as e:
         messagebox.showerror('Error',f'an error occurred {e}')
 
