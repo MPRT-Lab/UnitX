@@ -3,7 +3,9 @@ from tkinter import filedialog, messagebox
 import shutil
 import subprocess
 import os
+import platform
 
+global system_os = platform.system()
 def browse_folder():
     """Open a dialog to select the destination folder."""
     destination = filedialog.askdirectory(title="Select Destination Folder")
@@ -45,7 +47,12 @@ def go_to_next_page():
     # Clear current window
     root.destroy()
     try:
-        subprocess.run(['python', 'finish.py'], check=True)
+        if system_os == "Windows":
+            subprocess.run(['python', 'finish.py'], check=True)
+        elif system_os == "Linux":
+            subprocess.run(['python3', 'requirements.py'], check=True)
+        else:
+            subprocess.run(['python', 'requirements.py'], check=True)
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {e}")
 
