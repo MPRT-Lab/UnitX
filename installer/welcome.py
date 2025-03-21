@@ -91,6 +91,8 @@ def go_to_next_page():
             subprocess.run(['python', 'requirements.py'], check=True)
         elif system_os == "Linux":
             subprocess.run(['python3', 'requirements.py'], check=True)
+        else:
+            subprocess.run(['python', 'requirements.py'], check=True)
     except Exception as e:
         messagebox.showerror("Error", f"Could not open the next script: {e}")
 
