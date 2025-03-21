@@ -4,6 +4,7 @@ import subprocess
 import threading
 from tkinter import messagebox
 import win32api as win
+import platform
 
 # Global variables to control the progress update simulation
 installation_running = False
@@ -87,9 +88,9 @@ def go_to_back_page():
         if system_os == "Windows":
             subprocess.run(['python', 'welcome.py'])
         elif system_os == "Linux":
-            subprocess.run(['python3', 'requirements.py'], check=True)
+            subprocess.run(['python3', 'requirements.py'])
         else:
-            subprocess.run(['python', 'requirements.py'], check=True)
+            subprocess.run(['python', 'requirements.py'])
     except Exception as e:
         messagebox.showerror('Error',f'an error occurred: {e}')
 
