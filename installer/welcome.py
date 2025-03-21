@@ -10,6 +10,8 @@ import os
 import platform
 import subprocess
 
+global system_os = platform.system()
+
 def download_latest_python():
     # URL of the official Python website to get the latest version info
     url = "https://www.python.org/ftp/python/"
@@ -85,7 +87,10 @@ def go_to_next_page():
     # Clear current window
     root.destroy()
     try:
-        subprocess.run(['python', 'requirements.py'], check=True)
+        if system_os == "Windows":
+            subprocess.run(['python', 'requirements.py'], check=True)
+        elif system_os == "Linux":
+            subprocess.run(['python3', 'requirements.py'], check=True)
     except Exception as e:
         messagebox.showerror("Error", f"Could not open the next script: {e}")
 
